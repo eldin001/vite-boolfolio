@@ -2,6 +2,10 @@
   <AppHeader />
   <main class="container">
     <router-view  :key="$route.path"></router-view>
+    <ul>
+    <li v-for="project in projects" :key="project.id">{{ project.title }}</li>
+  </ul>
+
   </main>
 </template>
 
@@ -21,6 +25,7 @@ export default {
     getAllProjects() {
       axios.get(this.store.apiBaseUrl+'/projects').then((res) => {
 console.log(res.data);
+this.projects = res.data.results
       })
     }
   },
